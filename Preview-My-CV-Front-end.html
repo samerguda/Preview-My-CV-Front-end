@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview My CV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Preview My CV</h1>
+    <iframe src="cv.fornt.end.Samer.Alsaadni.pdf" type="application/pdf"></iframe>
+    
+    <div class="button-group">
+        <button onclick="printCV()">Print</button>
+        <button onclick="downloadCV()">Download</button>
+        <button onclick="sendViaWhatsApp()">Send via WhatsApp</button>
+        <button onclick="sendViaEmail()">Send via Email</button>
+    </div>
+
+    <script>
+        function printCV() {
+            const iframe = document.querySelector('iframe');
+            iframe.focus();
+            iframe.contentWindow.print();
+        }
+
+        function downloadCV() {
+            const link = document.createElement('a');
+            link.href = 'cv.fornt.end.Samer.Alsaadni.pdf';
+            link.download = 'cv.fornt.end.Samer.Alsaadni.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function sendViaWhatsApp() {
+            const url = encodeURIComponent('cv.fornt.end.Samer.Alsaadni.pdf');
+            const whatsappUrl = `https://api.whatsapp.com/send?text=Check%20out%20my%20CV%3A%20${url}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function sendViaEmail() {
+            const subject = encodeURIComponent('My CV');
+            const body = encodeURIComponent('Please find my CV attached.');
+            const email = 'mailto:?subject=' + subject + '&body=' + body + '&attachment=cv.fornt.end.Samer.Alsaadni.pdf';
+            window.location.href = email;
+        }
+    </script>
+</body>
+</html>
